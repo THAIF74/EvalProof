@@ -45,3 +45,16 @@ This direction is only a hypothesis. We still need a feature-by-feature comparis
 - LangSmith official documentation
 - MLflow official documentation
 - Inspect AI official documentation
+
+## Research update — 25 October 2026
+
+Official documentation checked:
+- LangSmith supports repeated evaluation runs.
+- MLflow tracks run parameters, metrics, metadata, and artifacts.
+- Inspect AI records structured evaluation logs, results, and errors.
+
+Conclusion:
+Basic evaluation logging, experiment tracking, and repeated runs already exist. EvalProof must not claim these features as novel.
+
+Next hypothesis to investigate:
+A framework-independent audit that checks whether an evaluation records enough information to reproduce it, flags missing fields, and reports repeat-run variation. This is not yet proven to be a unique or valuable gap.

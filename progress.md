@@ -21,3 +21,9 @@
 - Measured results
 - Model integration
 - Deployment
+
+### Final Day 1 checks
+- Python 3.14.8 confirmed.
+- Active interpreter points to this project's `.venv`.
+- Existing experiment script and test file are empty.
+- Existing-tool overlap documented; differentiation remains unproven.
