@@ -1,45 +1,54 @@
 ﻿# EvalProof
 
-**Status:** Day 1 — problem definition and setup  
-**Working concept:** Reproducibility and transparency for AI-agent evaluations.
+**Status:** Day 2 — initial metadata-audit prototype implemented.
+
+EvalProof explores whether a lightweight workflow can make AI evaluation records easier to inspect and reproduce.
 
 ## Problem hypothesis
 
-AI-agent evaluation results can be difficult to compare when settings, task versions, repeated-trial results, runtime, and execution details are recorded inconsistently.
+Evaluation results can be difficult to compare when task versions, configuration, runtime details, and other experiment metadata are recorded inconsistently.
 
-EvalProof will investigate whether a lightweight workflow can make those details easier to capture and compare. This is a hypothesis, not a claim that existing tools cannot already do it.
+Existing tools already support evaluation tracking and experiment logging. EvalProof's potential differentiation remains unproven.
 
-## Initial goals
+## Current prototype
 
-1. Record experiment configuration and software/runtime metadata.
-2. Store trial outcomes and elapsed time consistently.
-3. Repeat experiments and summarize variation.
-4. Export machine-readable results.
-5. Test the calculations automatically.
+The audit checks ten required metadata fields covering experiment identity, task and prompt versions, model, configuration, code version, environment, timestamp, and results.
 
-## First-version boundaries
+It reports missing fields, a completeness percentage, and limitations.
 
-- Start with a controlled local experiment; no paid model API required.
-- Do not claim universal reproducibility.
-- Do not claim uniqueness until existing tools have been compared.
-- Do not claim working features before they are implemented and tested.
+## Run the example
 
-## Day 1 checklist
+Command: `python -m examples.run_audit`
 
-- [x] Project folder and virtual environment exist.
-- [x] Initial directory structure exists.
-- [ ] Problem hypothesis and scope documented.
-- [ ] Existing-tool comparison researched.
-- [ ] Git repository initialized and Day 1 commit created.
+## Run the tests
+
+Command: `python -m unittest discover -s tests -v`
+
+The tests cover complete and empty records, missing fields, blank strings, empty lists, zero and false values, and invalid input types.
+
+## Limitations
+
+- Metadata completeness does not guarantee reproducibility.
+- Field presence does not verify value accuracy.
+- Required fields are an initial prototype policy, not an established standard.
+- Repeated-run variation analysis is not implemented.
+- No AI model integration or benchmark results are claimed.
+- Novelty and practical value remain unproven.
 
 ## Project structure
 
-- `experiments/` — experiment plan and runner.
-- `results/` — generated output.
+- `src/audit.py` — metadata audit logic.
 - `tests/` — automated tests.
-- `docs/` — research notes.
+- `examples/` — runnable example.
+- `experiments/EXPERIMENT_PLAN.md` — planned experiment.
+- `docs/EXISTING_TOOLS.md` — initial existing-tool comparison.
+- `results/` — generated reports.
 - `progress.md` — day-by-day progress.
 
-## Current status
+## Roadmap
 
-The project is at the problem-definition stage. No working runner, benchmark results, or proven novelty is claimed yet.
+1. Refine metadata validation.
+2. Build a controlled local repeated-run experiment.
+3. Summarize variation across trials.
+4. Export structured results.
+5. Compare against existing tools and assess whether a meaningful gap exists.
