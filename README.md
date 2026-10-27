@@ -1,8 +1,8 @@
 ﻿# EvalProof
 
-**Status:** Day 2 — initial metadata-audit prototype implemented.
+**Status:** Day 3 — metadata auditing and a basic repeated-evaluation runner implemented.
 
-EvalProof explores whether a lightweight workflow can make AI evaluation records easier to inspect and reproduce.
+EvalProof explores whether a lightweight workflow can make AI evaluation records easier to inspect, compare, and reproduce.
 
 ## Problem hypothesis
 
@@ -12,43 +12,62 @@ Existing tools already support evaluation tracking and experiment logging. EvalP
 
 ## Current prototype
 
-The audit checks ten required metadata fields covering experiment identity, task and prompt versions, model, configuration, code version, environment, timestamp, and results.
+### 1. Metadata audit
+`src/audit.py` checks ten required metadata fields and reports missing fields, a completeness percentage, and limitations.
 
-It reports missing fields, a completeness percentage, and limitations.
+### 2. Repeated-evaluation runner
+`src/repeatability.py` runs an evaluator multiple times and summarizes:
+- Individual trial scores
+- Mean score
+- Minimum and maximum scores
+- Score range
 
-## Run the example
+The current demo uses a fixed score of 0.8 across three trials. It validates the runner's basic workflow, not the reliability of a real AI model.
 
-Command: `python -m examples.run_audit`
+## Run the examples
+
+Metadata audit:
+
+`python -m examples.run_audit`
+
+Repeated-evaluation demo:
+
+`python -m examples.run_experiment`
+
+The repeated-evaluation report is written to `results/repeatability_demo.json`.
 
 ## Run the tests
 
-Command: `python -m unittest discover -s tests -v`
+`python -m unittest discover -s tests -v`
 
-The tests cover complete and empty records, missing fields, blank strings, empty lists, zero and false values, and invalid input types.
+The suite covers metadata validation and repeated-run score summaries, including invalid trial counts and invalid scores.
 
 ## Limitations
 
 - Metadata completeness does not guarantee reproducibility.
 - Field presence does not verify value accuracy.
-- Required fields are an initial prototype policy, not an established standard.
-- Repeated-run variation analysis is not implemented.
-- No AI model integration or benchmark results are claimed.
-- Novelty and practical value remain unproven.
+- Required metadata fields are an initial prototype policy, not an established standard.
+- The demo evaluator is deterministic and does not call a real AI model.
+- The runner does not control evaluator randomness or the execution environment.
+- A score range of zero in this demo does not establish AI reliability.
+- Novelty and practical value compared with existing tools remain unproven.
 
 ## Project structure
 
 - `src/audit.py` — metadata audit logic.
+- `src/repeatability.py` — repeated-run score summaries.
 - `tests/` — automated tests.
-- `examples/` — runnable example.
-- `experiments/EXPERIMENT_PLAN.md` — planned experiment.
+- `examples/run_audit.py` — metadata audit example.
+- `examples/run_experiment.py` — repeated-evaluation demo.
+- `experiments/EXPERIMENT_PLAN.md` — experiment plan and open questions.
 - `docs/EXISTING_TOOLS.md` — initial existing-tool comparison.
 - `results/` — generated reports.
 - `progress.md` — day-by-day progress.
 
 ## Roadmap
 
-1. Refine metadata validation.
-2. Build a controlled local repeated-run experiment.
-3. Summarize variation across trials.
-4. Export structured results.
-5. Compare against existing tools and assess whether a meaningful gap exists.
+1. Improve experiment records with useful run metadata.
+2. Record elapsed time and execution details.
+3. Decide how failed trials should be represented.
+4. Test with a meaningful evaluation task.
+5. Compare the workflow with existing tools and assess whether a genuine gap exists.

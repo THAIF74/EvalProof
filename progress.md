@@ -15,31 +15,38 @@
 - Added `src/audit.py` with ten required metadata fields.
 - Added a completeness percentage and a list of missing fields.
 - Added explicit limitations to the generated report.
-- Added a runnable JSON example in `examples/run_audit.py`.
-- Added automated tests in `tests/test_audit.py`.
+- Added `examples/run_audit.py`.
+- Added eight tests in `tests/test_audit.py`.
 
-### Validation completed
-- All 8 audit unit tests passed.
-- The example previously ran successfully and generated a JSON report.
-- Improved validation now treats blank strings and empty collections as missing.
-- Values such as zero and false remain valid present values.
+### Validation
+- All eight metadata-audit tests passed.
+- The metadata-audit example had previously run successfully.
+- Blank strings and empty collections count as missing.
+- Zero and false remain valid present values.
 
-### Not implemented yet
-- Repeated-run experiment runner.
-- Trial-variation analysis.
-- Benchmark measurements.
-- AI model integration.
-- Deployment.
+## Day 3 — repeated-evaluation runner
 
-### Remaining Day 2 checks
-- [ ] Review the README and progress log.
-- [ ] Run the unit tests again.
-- [ ] Run the example again.
-- [ ] Run `git diff --check`.
-- [ ] Review staged changes.
-- [ ] Commit and push Day 2 separately.
-- [ ] Verify a clean working tree.
+### Implemented
+- Added `src/repeatability.py` to run an evaluator multiple times.
+- Added mean, minimum, maximum, and score-range summaries.
+- Added input validation for trial counts and scores.
+- Added six tests in `tests/test_repeatability.py`.
+- Added `examples/run_experiment.py` to generate a JSON report.
+- Updated the README and experiment plan.
+
+### Validation
+- All 14 unit tests passed: eight audit tests and six repeatability tests.
+- The repeated-evaluation example ran successfully using `python -m examples.run_experiment`.
+- The demo generated `results/repeatability_demo.json`.
+- The deterministic demo returned a mean score of 0.8 and a score range of 0.0.
+- `git diff --check` passed before the documentation update.
+
+### Remaining work
+- Re-run tests and examples after the documentation update.
+- Review and commit Day 3 changes.
+- Push the commit and verify the working tree.
+- Improve run metadata and test a meaningful evaluation task.
 
 ## Research caveat
 
-The prototype currently measures metadata completeness only. It does not establish reproducibility, and the project's originality or practical advantage over existing tools remains unproven.
+The prototype checks metadata completeness and summarizes repeated scores. It does not establish reproducibility or AI-system reliability. Its originality and practical advantage over existing tools remain unproven.
