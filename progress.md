@@ -50,3 +50,11 @@
 ## Research caveat
 
 The prototype checks metadata completeness and summarizes repeated scores. It does not establish reproducibility or AI-system reliability. Its originality and practical advantage over existing tools remain unproven.
+
+### Follow-up validation
+
+- Re-ran all 14 tests successfully after the documentation update.
+- Confirmed the metadata-audit example generates `results/sample_audit.json`.
+- Confirmed the repeated-evaluation example generates `results/repeatability_demo.json`.
+- Confirmed `git diff --check` passes and the working tree is clean.
+- Installed pytest in the local virtual environment for validation.
