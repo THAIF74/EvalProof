@@ -128,3 +128,13 @@ These results confirm that the example workflows operate as intended. They do no
 ---
 
 EvalProof is an experimental project focused on making evaluation records easier to inspect and repeated-run results easier to analyze. Its usefulness and distinct contribution will be assessed through further implementation and testing.
+## Experiment Comparison
+EvalProof can compare two experiment records using their mean evaluation scores.
+The comparison report includes:
+- Baseline and candidate experiment IDs
+- Baseline and candidate scores
+- Score difference and absolute difference
+- Configurable comparison tolerance
+- Comparison status and interpretation
+The comparison feature validates experiment inputs and identifies score changes beyond a configured tolerance.
+Note: A score difference does not establish statistical significance or prove that one model is better.
